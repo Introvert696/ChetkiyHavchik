@@ -38,5 +38,13 @@ class orderModel {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
+    //модель получения токена
+    public static function getAllUser($conn){
+        $stmt = $conn->prepare("Select * from users");
+        $stmt->execute();
+        // set the resulting array to associative
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
 }

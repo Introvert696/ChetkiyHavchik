@@ -27,5 +27,17 @@ class OrderController {
         $result = orderModel::deleteOrder($conn, $id);
         return $result;
     }
+    //проверка токена на правильность
+    public function checkToken($conn,$postToken){
+        $result = orderModel::getAllUser($conn);
+        
+            if($result['token'] == $postToken) {
+                return true;
+            }
+            else{return false;
+            }
+        
+
+    }
 
 }
