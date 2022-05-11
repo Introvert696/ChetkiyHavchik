@@ -26,6 +26,7 @@ class Route
 
         //получаем коннект с БД
         $conn = GetConnect();
+        
         //получение массива с юрл
         $uriArr = $this->getUri();
 
