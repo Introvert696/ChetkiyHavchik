@@ -17,8 +17,8 @@ class orderModel {
         $stmt = $conn->prepare("INSERT INTO `orders`( `Order_FIO`, `Order_Number`, `Order_Email`, `Order_Address`, `Order_Purchases`, `Order_Comment`) VALUES ('$FIO','$number','$email','$address','$purchases','$comment')");
         $stmt->execute();
         // set the resulting array to associative
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result;
+        //$result = $stmt->fetch(PDO::FETCH_ASSOC);
+        //return $result;
     }
 
     //модель выполнения заказа

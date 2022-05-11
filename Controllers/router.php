@@ -176,6 +176,7 @@ class Route
                         exit();
                     } catch (Exception $exc) {
                         http_response_code(501);
+                        print_r($exc);
                     }
                 } else {
                     http_response_code(502);
