@@ -167,9 +167,9 @@ class Route
             //создание заказа
             if (isset($uriArr[1]) && $uriArr[1] == "create") {
                 //проверка на существование переменных переданных POST-запросом
-                if (isset($_POST['FIO']) && isset($_POST['number']) && isset($_POST['email']) && isset($_POST['address']) && isset($_POST['purchases']) && isset($_POST['comment'])) {
+                if (isset($_POST['FIO']) && isset($_POST['number']) && isset($_POST['email']) && isset($_POST['address']) && isset($_POST['purchases']) && isset($_POST['price'])&& isset($_POST['comment'])) {
                     try {
-                        $orderController->createOrder($conn, $_POST['FIO'], $_POST['number'], $_POST['email'], $_POST['address'], $_POST['purchases'], $_POST['comment']);
+                        $orderController->createOrder($conn, $_POST['FIO'], $_POST['number'], $_POST['email'], $_POST['address'], $_POST['purchases'], $_POST['price'], $_POST['comment']);
 
                         http_response_code(301);
                         header("Location: http://chetkiyhavchik.eurodir.ru");

@@ -1,9 +1,11 @@
 <?php
 
-class orderModel {
+class orderModel
+{
 
     //модель списка заказов
-    public static function listOrder($conn) {
+    public static function listOrder($conn)
+    {
         $stmt = $conn->prepare("SELECT * FROM orders");
         $stmt->execute();
         // set the resulting array to associative
@@ -12,9 +14,10 @@ class orderModel {
     }
 
     //модель создания заказа
-    public static function createOrder($conn, $FIO, $number, $email, $address, $purchases, $comment) {
+    public static function createOrder($conn, $FIO, $number, $email, $address, $purchases, $price, $comment)
+    {
 
-        $stmt = $conn->prepare("INSERT INTO `orders`( `Order_FIO`, `Order_Number`, `Order_Email`, `Order_Address`, `Order_Purchases`, `Order_Comment`) VALUES ('$FIO','$number','$email','$address','$purchases','$comment')");
+        $stmt = $conn->prepare("INSERT INTO `orders`( `Order_FIO`, `Order_Number`, `Order_Email`, `Order_Address`, `Order_Purchases`,`Order_Price` , `Order_Comment`) VALUES ('$FIO','$number','$email','$address','$purchases','$price','$comment')");
         $stmt->execute();
         // set the resulting array to associative
         //$result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -22,7 +25,8 @@ class orderModel {
     }
 
     //модель выполнения заказа
-    public static function doneOrder($conn, $id) {
+    public static function doneOrder($conn, $id)
+    {
         $stmt = $conn->prepare("UPDATE `orders` SET `Order_State`='1' WHERE Order_id = $id");
         $stmt->execute();
         // set the resulting array to associative
@@ -31,7 +35,8 @@ class orderModel {
     }
 
     //модель удаления заказа
-    public static function deleteOrder($conn, $id) {
+    public static function deleteOrder($conn, $id)
+    {
         $stmt = $conn->prepare("DELETE FROM `orders` WHERE Order_id = " . $id);
         $stmt->execute();
         // set the resulting array to associative
@@ -39,12 +44,12 @@ class orderModel {
         return $result;
     }
     //модель получения токена
-    public static function getAllUser($conn){
+    public static function getAllUser($conn)
+    {
         $stmt = $conn->prepare("Select * from users");
         $stmt->execute();
         // set the resulting array to associative
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
-
 }
