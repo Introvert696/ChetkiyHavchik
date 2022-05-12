@@ -26,7 +26,7 @@ class Route
 
         //получаем коннект с БД
         $conn = GetConnect();
-        
+
         //получение массива с юрл
         $uriArr = $this->getUri();
 
@@ -37,8 +37,23 @@ class Route
         $itemController = new itemsController();
         $orderController = new OrderController();
 
+        //проверка токена и возврат ответа
+        if ($uriArr[0] == "token") {
+            if (isset($_POST['token'])) {
+                $returnTokenCheck = $orderController->checkToken($conn, $_POST['token']);
+                http_response_code(200);
+                if($returnTokenCheck){
+                    echo "true";
+                }else{
+                    echo "false";
+                }
+            }else{
+                http_response_code(404);
+            }
+        }
+
         //начало самого роутинга
-        if ($uriArr[0] == "items") {
+        else if ($uriArr[0] == "items") {
             if (isset($uriArr[1])) {
                 $subDomen = $uriArr[1];
                 $subDomen = explode("?", $subDomen);
@@ -124,18 +139,17 @@ class Route
                                 http_response_code(501);
                                 echo 'Items used';
                             }
-                        }else{
+                        } else {
                             //если токен неправильный
                             http_response_code(401);
                         }
-                    }else{
+                    } else {
                         //если нету токена в посте
                         http_response_code(401);
                     }
-                    
                 } else {
                     // если строка имеет вид /delete/
-                    
+
                     http_response_code(404);
                 }
             } else {
@@ -167,7 +181,7 @@ class Route
             //создание заказа
             if (isset($uriArr[1]) && $uriArr[1] == "create") {
                 //проверка на существование переменных переданных POST-запросом
-                if (isset($_POST['FIO']) && isset($_POST['number']) && isset($_POST['email']) && isset($_POST['address']) && isset($_POST['purchases']) && isset($_POST['price'])&& isset($_POST['comment'])) {
+                if (isset($_POST['FIO']) && isset($_POST['number']) && isset($_POST['email']) && isset($_POST['address']) && isset($_POST['purchases']) && isset($_POST['price']) && isset($_POST['comment'])) {
                     try {
                         $orderController->createOrder($conn, $_POST['FIO'], $_POST['number'], $_POST['email'], $_POST['address'], $_POST['purchases'], $_POST['price'], $_POST['comment']);
 
