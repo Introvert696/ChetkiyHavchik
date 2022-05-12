@@ -13,6 +13,8 @@ function GetConnect() {
         //чета вроде отображения ошибок
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         //если все норм возвращаем коннект
+        $stmt = $conn->prepare("SET NAMES 'utf8'");
+        $stmt->execute();
         return $conn;
     } catch (PDOException $e) {
         //если плоха, то возвращаем ошибочку
