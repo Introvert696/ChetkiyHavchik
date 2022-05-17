@@ -2,10 +2,10 @@
 
 function GetConnect() {
     //переменные для настройки коннекта с бд
-    $server = "localhost";
-    $dbName = "chetkiyhavchik";
-    $user = "root";
-    $password = "";
+    $server = DBSERVER;
+    $dbName = DBNAME;
+    $user = DBUSER;
+    $password = DBPASSWRD;
     
     try {
         //создание коннекта с бд

@@ -1,7 +1,6 @@
 <?php
 
-//обьявления константы с адресом сайта "/" - после конца обязательно
-define("SITE_ADDR", "http://localhost/");
+require_once 'config/config.php';
 
 //подключение к бд файлу
 require_once 'db/dbconnect.php';
@@ -176,6 +175,11 @@ class Route
                 }
             }
         }
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+
         //Работа с заказами
         else if ($uriArr[0] == "order") {
             //создание заказа
@@ -186,6 +190,7 @@ class Route
                         $orderController->createOrder($conn, $_POST['FIO'], $_POST['number'], $_POST['email'], $_POST['address'], $_POST['purchases'], $_POST['price'], $_POST['comment']);
 
                         http_response_code(301);
+                        
                         header("Location: http://chetkiyhavchik.eurodir.ru");
                         exit();
                     } catch (Exception $exc) {

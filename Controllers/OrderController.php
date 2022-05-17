@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Models/orderModel.php';
+require_once 'Models/itemsModel.php';
 
 class OrderController
 {
@@ -15,6 +16,14 @@ class OrderController
     //создание заказа
     public function createOrder($conn, $FIO, $number, $email, $address, $purchases, $price, $comment)
     {
+        $allItemsCheck = itemsModel::GetAllItems($conn);
+        foreach($allItemsCheck as $item){           
+            //установка реальной цены для заказа
+            //сделано для безопасности
+            if($item['Item_Id'] == $purchases){
+                $price = $item['Item_Price'];
+            }
+        }
         $result = orderModel::createOrder($conn, $FIO, $number, $email, $address, $purchases, $price,  $comment);
         return $result;
     }
